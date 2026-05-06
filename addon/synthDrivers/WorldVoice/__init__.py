@@ -86,6 +86,7 @@ config.conf.spec["WorldVoice"] = {
 		"item_wait_factor": "boolean(default=false)",
 		"chinesespace_wait_factor": "boolean(default=false)",
 		"speech_viewer": "boolean(default=false)",
+		"apply_speech_dictionaries": "boolean(default=false)",
 	},
 	"voices": {
 		"__many__": {
