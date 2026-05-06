@@ -9,6 +9,7 @@ import config
 from logHandler import log
 from speech.commands import BreakCommand, LangChangeCommand
 from speech.extensions import filter_speechSequence
+import speechDictHandler
 from synthDriverHandler import getSynth
 
 from .._speechcommand import WVLangChangeCommand
@@ -135,6 +136,16 @@ def ignore_comma_between_number(speechSequence):
 		yield from (_COMMA_NUMBER_RE.sub(lambda m: '', command) if isinstance(command, str) else command for command in speechSequence)
 	else:
 		yield from speechSequence
+
+
+# @with_order_log("apply_speech_dictionaries")
+@with_speech_sequence_log("apply_speech_dictionaries")
+def apply_speech_dictionaries(speechSequence):
+	for item in speechSequence:
+		if isinstance(item, str):
+			yield speechDictHandler.processText(item)
+		else:
+			yield item
 
 
 # @with_order_log("item_wait_factor")
@@ -580,36 +591,33 @@ def order_move_to_start_register():
 	filter_speechSequence.moveToEnd(speech_viewer, False)
 	filter_speechSequence.moveToEnd(number_wait_factor, False)
 	filter_speechSequence.moveToEnd(item_wait_factor, False)
-
 	filter_speechSequence.moveToEnd(inject_chinese_space_pause, False)
 	filter_speechSequence.moveToEnd(inject_number_mode, False)
 	filter_speechSequence.moveToEnd(inject_number_language, False)
-
 	filter_speechSequence.moveToEnd(ignore_comma_between_number, False)
+	filter_speechSequence.moveToEnd(apply_speech_dictionaries, False)
 
 
 def order_move_to_end_register():
 	# queue: first in first out
+	filter_speechSequence.moveToEnd(apply_speech_dictionaries, True)
 	filter_speechSequence.moveToEnd(ignore_comma_between_number, True)
-
 	filter_speechSequence.moveToEnd(inject_number_language, True)
 	filter_speechSequence.moveToEnd(inject_number_mode, True)
 	filter_speechSequence.moveToEnd(inject_chinese_space_pause, True)
-
 	filter_speechSequence.moveToEnd(item_wait_factor, True)
 	filter_speechSequence.moveToEnd(number_wait_factor, True)
-
 	filter_speechSequence.moveToEnd(speech_viewer, True)
 
 
 def static_register():
 	log.debug("static register")
 
+	filter_speechSequence.register(apply_speech_dictionaries)
 	filter_speechSequence.register(inject_chinese_space_pause)
 	filter_speechSequence.register(inject_number_language)
 	filter_speechSequence.register(inject_number_mode)
 	filter_speechSequence.register(number_wait_factor)
-
 	filter_speechSequence.register(speech_viewer)
 
 
@@ -623,13 +631,11 @@ def dynamic_register():
 def unregister():
 	log.debug("unregister")
 
+	filter_speechSequence.unregister(apply_speech_dictionaries)
 	filter_speechSequence.unregister(ignore_comma_between_number)
-
 	filter_speechSequence.unregister(inject_chinese_space_pause)
 	filter_speechSequence.unregister(inject_number_mode)
 	filter_speechSequence.unregister(inject_number_language)
-
 	filter_speechSequence.unregister(item_wait_factor)
 	filter_speechSequence.unregister(number_wait_factor)
-
 	filter_speechSequence.unregister(speech_viewer)
