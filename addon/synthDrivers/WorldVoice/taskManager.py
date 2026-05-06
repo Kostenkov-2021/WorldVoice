@@ -110,6 +110,14 @@ class TaskManager:
 		self._q.put(_Task(voiceInstance, fn, False, fut, token))
 		return fut
 
+	def add_break_task(self, voiceInstance, seconds: float):
+		token = CancellationToken()
+
+		def _break():
+			token.wait(seconds)
+
+		return self.add_task(voiceInstance, _break, token=token)
+
 	def add_speak_task(self, voiceInstance, speak_fn, *, token: CancellationToken | None = None, timeout=None):
 		fut = SpeechFuture()
 		self._q.put(_Task(voiceInstance, speak_fn, True, fut, token, timeout))

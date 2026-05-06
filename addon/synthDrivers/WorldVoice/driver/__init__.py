@@ -1,5 +1,3 @@
-import time
-
 import config
 import languageHandler
 from synthDriverHandler import getSynth
@@ -154,9 +152,7 @@ class Voice(object):
 		self.taskManager.add_speak_task(self, _speak)
 
 	def breaks(self, sec):
-		def _breaks():
-			time.sleep(sec)
-		self.taskManager.add_task(self, _breaks)
+		self.taskManager.add_break_task(self, sec)
 
 	def stop(self):
 		self.core.cancel()
