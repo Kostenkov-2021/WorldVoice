@@ -66,7 +66,20 @@ WorldVoice 会独立保存每个语音角色的设置值，切换角色时会应
 
 # WorldVoice 更新日志
 
-## WorldVoice v5.0 更新
+## WorldVoice 6 更新
+
+*   **改善延迟说明时的响应速度：** break task 现在可被取消，可减少启用延迟字符说明时的操作延迟。
+*   **改善读音字典兼容性：** 读音字典现在会在 WorldVoice 语音流程前先应用。
+*   **调整 pipeline settings 内部实现：** 重构语音流程设置处理，让行为更清晰，也更容易维护。
+*   **改善语音元数据处理：** 现在会区分不同引擎中重复的语音名称，并规范化 fallback language descriptions。
+*   **重构驱动架构：** 重新设计语音引擎驱动架构与加载方式，以 manifest-based discovery 取代 hard-coded loading。
+*   **调整核心封装：** 重新整理 core driver packaging。
+*   **改善 Sonic 初始化：** Sonic 现在会在第一次语音回调时才延迟初始化。
+*   **调整 task 执行内部实现：** TaskManager 现在采用 Future-based design。
+*   **改善内建语音引擎整合：** SAPI5、OneCore 和 eSpeak 现在会继承 built-in base class。
+*   **改善数字发音逻辑：** 调整数字发音与翻译逻辑。
+
+## WorldVoice 5 更新
 
 *   **新增功能及设置面板：** 语音流程和日志记录
 *   **移除已弃用的功能和设置面板：** Unicode 规范化、数字-点替换以及其他过时的设置项目
@@ -76,7 +89,7 @@ WorldVoice 会独立保存每个语音角色的设置值，切换角色时会应
 *   **增强用户体验：** 改进语音引擎和日志记录对话框中的交互体验
 *   **修订界面文本：** 更新界面文本以统一风格
 
-## WorldVoice v4.0 更新
+## WorldVoice 4 更新
 
 *   将 Espeak 引擎集成到 WorldVoice 支持的引擎中。
 *   在 NVDA 的语音设置面板中增加语速加倍设置项目。

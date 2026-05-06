@@ -66,7 +66,20 @@ These options adjust how WorldVoice handles numbers, punctuation, and character 
 
 # WorldVoice Changelog
 
-## WorldVoice v5.0 Update
+## WorldVoice 6 Update
+
+* **Fixed responsiveness during delayed descriptions:** Break tasks are now cancellable, reducing lag when delayed character descriptions are enabled.
+* **Improved speech dictionary compatibility:** Speech dictionaries are now applied before the WorldVoice pipeline.
+* **Refined pipeline settings internals:** Pipeline settings handling has been refactored for clearer behavior and easier maintenance.
+* **Improved voice metadata handling:** Duplicate voice names across engines are now disambiguated, and fallback language descriptions are normalized.
+* **Refactored driver architecture:** Engine driver architecture and loading have been redesigned, replacing hard-coded loading with manifest-based discovery.
+* **Refined core packaging:** Core driver packaging has been reorganized.
+* **Improved Sonic initialization:** Sonic is now initialized lazily on first voice callback.
+* **Refined task execution internals:** TaskManager now uses a Future-based design.
+* **Improved built-in engine integration:** SAPI5, OneCore, and eSpeak now inherit from the built-in base class.
+* **Improved number pronunciation logic:** Number pronunciation and translation logic have been refined.
+
+## WorldVoice 5 Update
 
 * **Added features and settings panels:** Speech Pipeline and Log Record
 * **Removed deprecated features and settings panels:** Unicode normalization, number-dot replacement, and other outdated settings
@@ -76,7 +89,7 @@ These options adjust how WorldVoice handles numbers, punctuation, and character 
 * **Improved user experience:** Improved interactions in the Speech Engine and Log Record dialogs
 * **Revised interface text:** Updated interface text for a consistent style
 
-## WorldVoice v4.0 Update
+## WorldVoice 4 Update
 
 * Integrated the Espeak engine into the engines supported by WorldVoice.
 * Added a rate boost setting to the NVDA voice settings panel.

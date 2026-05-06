@@ -1,6 +1,6 @@
 # WorldVoice 使用指南
 
-WorldVoice 是一款 NVDA 附加元件，支援 Espeak、OneCore 和 SAPI5 等不同語音引擎角色之間的自動切換，並提供各式各樣的客製化設定。使用者可依照不同情境及個人偏好，輕鬆調整語音設定。
+WorldVoice 是一款 NVDA 附加元件，支援 Espeak、OneCore、RHVoice 及 SAPI5 等不同語音引擎角色之間的自動切換，並提供各式各樣的客製化設定。使用者可依照不同情境及個人偏好，輕鬆調整語音設定。
 
 隨著全球化的普及，人們接觸多國文字內容的機會也越來越多。無論是學習教材還是休閒閱讀，我們經常可以看到不同語言混合使用，甚至在同一句話中出現中英日多種語言文字的情況。
 
@@ -66,7 +66,20 @@ WorldVoice 會獨立儲存每個語音角色的設定值，切換角色時會套
 
 # WorldVoice 更新日誌
 
-## WorldVoice v5.0 更新
+## WorldVoice 6 更新
+
+*   **改善延遲說明時的回應速度：** break task 現在可被取消，可減少啟用延遲字元說明時的操作延遲。
+*   **改善讀音字典相容性：** 讀音字典現在會在 WorldVoice 語音流程前先套用。
+*   **調整 pipeline settings 內部實作：** 重構語音流程設定處理，讓行為更清楚，也更容易維護。
+*   **改善語音中繼資料處理：** 現在會區分不同引擎中重複的語音名稱，並正規化 fallback language descriptions。
+*   **重構驅動架構：** 重新設計語音引擎驅動架構與載入方式，以 manifest-based discovery 取代 hard-coded loading。
+*   **調整核心封裝：** 重新整理 core driver packaging。
+*   **改善 Sonic 初始化：** Sonic 現在會在第一次語音回呼時才延遲初始化。
+*   **調整 task 執行內部實作：** TaskManager 現在採用 Future-based design。
+*   **改善內建語音引擎整合：** SAPI5、OneCore 和 eSpeak 現在會繼承 built-in base class。
+*   **改善數字發音邏輯：** 調整數字發音與翻譯邏輯。
+
+## WorldVoice 5 更新
 
 *   **新增功能及設定面板：** 語音流程和日誌記錄
 *   **移除已棄用的功能和設置面板：** Unicode 正規化、數字-點替換以及其他過時的設定項目
@@ -76,7 +89,7 @@ WorldVoice 會獨立儲存每個語音角色的設定值，切換角色時會套
 *   **增強使用者體驗：** 改進語音引擎和日誌記錄對話方塊中的互動體驗
 *   **修訂介面文本：** 更新介面文本以統一風格
 
-## WorldVoice v4.0 更新
+## WorldVoice 4 更新
 
 *   將 Espeak 引擎整合到 WorldVoice 支援的引擎中。
 *   在 NVDA 的語音設定面板中增加語速加倍設定項目。
